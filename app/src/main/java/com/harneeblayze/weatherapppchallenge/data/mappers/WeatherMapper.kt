@@ -9,7 +9,9 @@ import com.harneeblayze.weatherapppchallenge.domain.weather.Weather
 import com.harneeblayze.weatherapppchallenge.domain.weather.Unit
 import com.harneeblayze.weatherapppchallenge.domain.weather.WeatherInfo
 import com.harneeblayze.weatherapppchallenge.domain.weather.WeatherType
+import java.time.LocalDateTime
 import java.time.OffsetDateTime
+import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 import kotlin.math.roundToInt
@@ -24,13 +26,14 @@ fun AutoWeatherDto.toWeather(): Weather = Weather(
 
 
 private fun mapToCurrentWeather(currentWeather: CurrentWeatherDto): CurrentWeather {
-    val formattedTime = formattedDateToHourlyTime(currentWeather.time)
+    val formattedTime = OffsetDateTime.parse(currentWeather.time + 'Z')
+    val time = formattedTime.formattedDateToHourlyTime("HH:mm")
     return CurrentWeather(
         temperature = formatTemperatureValue(
             temperature = currentWeather.temperature,
             unit = Unit.METRIC.value
         ),
-        time = formattedTime
+        time = time
     )
 }
 
@@ -41,7 +44,9 @@ private fun mapDatesToHourly(hourly: HourlyDto): HourlyWeather {
         val temperature = hourly.temperatures[index]
         val formattedTemperature =
             formatTemperatureValue(temperature = temperature, unit = Unit.METRIC.value)
-        val formattedTime = formattedDateToHourlyTime(time)
+        val offsetDateTime = OffsetDateTime.parse(time + 'Z')
+        val dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm", Locale.getDefault())
+        val formattedTime = dateTimeFormatter.format(offsetDateTime)
         val weatherInfo = WeatherInfo(time = formattedTime, temperature = formattedTemperature,
         weatherType = WeatherType.humidityConverter(temperature.roundToInt()))
         weatherInfoList.add(weatherInfo)
@@ -50,11 +55,13 @@ private fun mapDatesToHourly(hourly: HourlyDto): HourlyWeather {
 }
 
 
-fun formattedDateToHourlyTime(time: String): String {
-    val offsetDateTime = OffsetDateTime.parse(time + "Z")
-    val dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm", Locale.getDefault())
-    return dateTimeFormatter.format(offsetDateTime)
-}
+fun OffsetDateTime.formattedDateToHourlyTime(time: String, locale: Locale = Locale.getDefault()):
+        String =
+    this.formattedDateToHourlyTime(DateTimeFormatter.ofPattern(time, locale))
+
+fun OffsetDateTime.formattedDateToHourlyTime(formatter: DateTimeFormatter):
+        String = formatter.format(LocalDateTime.ofInstant(this.toInstant(), ZoneId.systemDefault()))
+
 
 private fun formatTemperatureValue(temperature: Float, unit: String): String =
     "${temperature.roundToInt()}${getUnitSymbols(unit = unit)}"
