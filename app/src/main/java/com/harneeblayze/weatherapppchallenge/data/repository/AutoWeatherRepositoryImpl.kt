@@ -40,7 +40,7 @@ class AutoWeatherRepositoryImpl @Inject constructor(
         }.catch { throwable ->
             pollingService.cancelPolling()
             val errorMessage = when (throwable) {
-                is IOException -> ""//R.string.error_connection
+                is IOException -> "IOException occurred"
                 else ->  "An unknown error occurred."
             }
             emit(Resource.Error(errorMessage))
