@@ -40,7 +40,7 @@ val fakeMapperWeatherResp = Weather(
     hourlyWeather = HourlyWeather(data = listOf(WeatherInfo(temperature = "17°C", time = "18:00",
     weatherType = WeatherType.humidityConverter(17)))),
     currentWeather = CurrentWeather(
-        temperature = "14°C",
-        time = "18:00"
+        temperature = "12°C",
+        time = "20:00"
     )
 )

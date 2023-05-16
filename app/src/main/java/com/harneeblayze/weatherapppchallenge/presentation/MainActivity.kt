@@ -9,7 +9,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import com.harneeblayze.weatherapppchallenge.ui.theme.WeatherApppChallengeTheme
+import com.harneeblayze.weatherapppchallenge.presentation.ui.theme.WeatherApppChallengeTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

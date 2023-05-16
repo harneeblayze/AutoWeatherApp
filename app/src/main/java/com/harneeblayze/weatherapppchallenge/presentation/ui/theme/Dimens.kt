@@ -1,4 +1,4 @@
-package com.harneeblayze.weatherapppchallenge.ui.theme
+package com.harneeblayze.weatherapppchallenge.presentation.ui.theme
 
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp

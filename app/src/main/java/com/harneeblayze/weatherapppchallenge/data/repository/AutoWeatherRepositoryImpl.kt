@@ -1,5 +1,6 @@
 package com.harneeblayze.weatherapppchallenge.data.repository
 
+import com.harneeblayze.weatherapppchallenge.R
 import com.harneeblayze.weatherapppchallenge.data.Coordinate
 import com.harneeblayze.weatherapppchallenge.data.PollingService
 import com.harneeblayze.weatherapppchallenge.data.TEN_SECONDS
@@ -61,7 +62,7 @@ class AutoWeatherRepositoryImpl @Inject constructor(
             } catch(e: Exception) {
                 pollingService.cancelPolling()
                 e.printStackTrace()
-                emit(Resource.Error(e.message ?: "An unknown error occurred."))
+                emit(Resource.Error((e.message ?: R.string.exception_error_msg) as String))
             }
 
 

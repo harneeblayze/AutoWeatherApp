@@ -31,9 +31,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.harneeblayze.weatherapppchallenge.domain.weather.HourlyWeather
 import com.harneeblayze.weatherapppchallenge.domain.weather.WeatherInfo
-import com.harneeblayze.weatherapppchallenge.ui.theme.DarkBlue
-import com.harneeblayze.weatherapppchallenge.ui.theme.DeepBlue
-import com.harneeblayze.weatherapppchallenge.ui.theme.Dimens
+import com.harneeblayze.weatherapppchallenge.presentation.ui.theme.DarkBlue
+import com.harneeblayze.weatherapppchallenge.presentation.ui.theme.DeepBlue
+import com.harneeblayze.weatherapppchallenge.presentation.ui.theme.Dimens
 
 @Composable
 fun WeatherHomeScreen(
@@ -77,7 +77,8 @@ fun WeatherHomeScreen(
             Spacer(modifier = Modifier.weight(0.5f))
         }
         WeatherDisplayCard(state = state , backgroundColor =
-        DeepBlue)
+        DeepBlue
+        )
 
         state.weather?.hourlyWeather?.let { hourlyWeather ->
             WeatherForecastList(hourlyWeather)

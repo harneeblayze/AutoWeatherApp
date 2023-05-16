@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.harneeblayze.weatherapppchallenge.R
-import com.harneeblayze.weatherapppchallenge.ui.theme.Dimens
+import com.harneeblayze.weatherapppchallenge.presentation.ui.theme.Dimens
 
 
 @Composable

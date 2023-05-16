@@ -1,4 +1,4 @@
-package com.harneeblayze.weatherapppchallenge.ui.theme
+package com.harneeblayze.weatherapppchallenge.presentation.ui.theme
 
 import android.app.Activity
 import android.os.Build
